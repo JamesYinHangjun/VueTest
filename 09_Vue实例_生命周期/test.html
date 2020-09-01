@@ -34,6 +34,15 @@
     data: {
       isShow: true
     },
+    beforeCreate() {
+      console.log("beforeCreated",this.isShow)    // =>undefined
+    },
+    created() {
+      console.log("created",this.isShow)          // =>true
+    },
+    beforeMount() {
+      console.log("beforeMount")              // => 这里还没有生成真实dom
+    },
     mounted() {
       // 三种处理this 的方法
 
@@ -50,6 +59,11 @@
       }.bind(this), 1000)
     },
 
+     // 更新
+    beforeUpdate() {
+      console.log("beforeUpdate")
+    },
+
     // 在vm死亡之前，做一些清尾的工作，如清理定时器
     beforeDestroy() {
       clearInterval(this.intervalId)
@@ -61,6 +75,11 @@
       }
     }
   }).$mount('#app')
+
+
+
+
+ 
 </script>
 
 </body>
