@@ -23,16 +23,52 @@
 <div id="example">
 
   <h2>1. 绑定监听</h2>
+  <button @click="test1">绑定监听</button>
+  <!-- 拿到传入的参数 -->
+  <button @click="test2('hello')">传参</button>
+  <!-- 又拿传入的参数，又拿event -->
+  <button @click="test3('hello', $event)">传参</button>
 
   <h2>2. 事件修饰符</h2>
+  <!-- 事件处理的2个重要操作
+      1.阻止事件的默认操作
+      2.停止事件冒泡
+  -->
+  <a href="http:www.baidu.com" @click.prevent="test4">去百度</a>
 
   <h2>3. 按键修饰符</h2>
-
+  <!-- 按enter键才弹出 -->
+  <input type="text" v-model="msg" @keyup = "test5">
+  <input type="text" v-model="msg" @keyup.enter = "test5">
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el: "#example",
+    data: {
+      msg: ''
+    },
+    methods: {
+      test1(event) {
+        alert(event.target.innerHTML)
+      },
+      test2(a) {
+        alert(a)
+      },
+      test3(a, event) {
+        alert(a + "----" + event.target.innerHTML)
+      },
+      test4() {
+        alert('去百度')
+      },
+      test5(event) {
+        if(event.keyCode === 13) {
+          alert(this.msg)
+        }
+      }
+    }
+  })
 </script>
 </body>
 </html>
